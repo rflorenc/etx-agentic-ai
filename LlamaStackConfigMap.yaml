@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: llamastack-config
+data:
+  run.yaml: |
+    # Llama Stack configuration
+    version: '2'
+    image_name: vllm
+    apis:
+    - tool_runtime
+    providers:
+      tool_runtime:
+      - provider_id: tavily-search
+        provider_type: remote::tavily-search
+        config:
+          api_key: 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
+          max_results: 3
+    tools:
+      - name: builtin::websearch
+        enabled: true
+    tool_groups:
+    - provider_id: tavily-search
+      toolgroup_id: builtin::websearch
+    server:
+      port: 8321

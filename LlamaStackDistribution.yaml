@@ -1,0 +1,14 @@
+apiVersion: llamastack.io/v1alpha1
+kind: LlamaStackDistribution
+metadata:
+   name: llamastack-with-config
+spec:
+   replicas: 1
+   server:
+     distribution:
+       name: rh-dev # remote-vllm (upstream)
+     containerSpec:
+       port: 8321
+     userConfig:
+        # reference to the configmap that contains Llama stack configuration.
+       configMapName: llama-stack-config
